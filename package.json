@@ -1,0 +1,11 @@
+{
+  "name": "comfyui-texturepainterai-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Source of web/texpaint_editor.bundle.js (Three.js editor). The shipped bundle is already built - rebuilding is optional.",
+  "scripts": {
+    "build": "esbuild src/entry.js --bundle --format=esm --minify --target=es2020 --legal-comments=none --outfile=web/texpaint_editor.bundle.js"
+  },
+  "dependencies": { "three": "0.160.0" },
+  "devDependencies": { "esbuild": "0.21.5" }
+}
