@@ -1,6 +1,6 @@
 I will be extremely grateful if you support my efforts, with buying me a coffee!
 
-buymeacoffee.com/nextarbgm
+https://buymeacoffee.com/nextarbgm
 
 The custom node is completely free for use! If you have any ideas or suggestions how to improve it please let me know in the discussion area, or DM me via Discord:
 
