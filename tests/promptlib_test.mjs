@@ -1,0 +1,12 @@
+import { TRANSITION_PROMPTS, TR_CATEGORIES, HARMONIZE_PROMPTS, TRANSITION_SETTINGS, promptsByCategory } from '../src/promptlib.js';
+let failed = false; const ok = (n, c, x = '') => { console.log((c ? 'PASS ' : 'FAIL ') + n + (c ? '' : '  ' + x)); if (!c) failed = true; };
+ok('at least 20 transition prompts', TRANSITION_PROMPTS.length >= 20, String(TRANSITION_PROMPTS.length));
+ok('ids are unique', new Set(TRANSITION_PROMPTS.map((p) => p.id)).size === TRANSITION_PROMPTS.length);
+const need = ['character', 'face', 'body', 'skin', 'transitions', 'details', 'lighting', 'contrast', 'cover'];
+ok('all requested categories exist and have prompts', need.every((c) => TR_CATEGORIES.some(([k]) => k === c) && promptsByCategory(c).length >= 2));
+ok('every prompt has title + sensible text', TRANSITION_PROMPTS.every((p) => p.title && p.text.length > 30 && p.text.length < 240 && !/[.]$/.test(p.text)));
+ok('prompts mention the marked area (they are written for the transition mask)', TRANSITION_PROMPTS.every((p) => /marked area|the marked/.test(p.text)));
+ok('harmonize prompts: unique, strengths in range', new Set(HARMONIZE_PROMPTS.map((p) => p.id)).size === HARMONIZE_PROMPTS.length && HARMONIZE_PROMPTS.every((p) => p.strength >= 0.2 && p.strength <= 1 && p.text.length > 40));
+ok('transition settings are soft', TRANSITION_SETTINGS.mask_feather >= 8 && TRANSITION_SETTINGS.bakeStrength <= 1);
+ok('all filter returns everything', promptsByCategory('all').length === TRANSITION_PROMPTS.length);
+process.exit(failed ? 1 : 0);

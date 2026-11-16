@@ -1,0 +1,14 @@
+export { TexturePaintEditor, DEFAULT_STATE } from './editor.js';
+export { extOf, SUPPORTED_EXT } from './meshio.js';
+export { exportModel, bakeUVMap, makeZip, crc32, exportGeometryData } from './export.js';
+export { BLEND_MODES } from './layers.js';
+export * as THREE from 'three';
+export { uvHealth } from './meshio.js';
+export { composePrompt } from './promptprev.js';
+export { saveProject, loadProject, readStoredZip } from './project.js';
+export { layoutEmbedHost, EMBED } from './layout.js';
+export { realignWidgetValues } from './widgetvals.js';
+export { tileGrid, tilesWithMask } from './tiles.js';
+export { adoptStart, successBelongsTo } from './runwatch.js';
+export { createHostSession } from './hostsession.js';
+export { installBridge, BridgeClient } from './bridge.js';

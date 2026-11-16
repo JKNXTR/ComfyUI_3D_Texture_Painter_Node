@@ -1,0 +1,28 @@
+<!doctype html><html><head><meta charset="utf-8"><title>e2e</title></head>
+<body style="margin:0;background:#111">
+<div id="mount" style="width:1280px;height:800px;position:relative"></div>
+<script type="module">
+import { app } from '/scripts/app.js';
+import '/web/texpaint.js';
+window.app = app;
+function makeNodeType() { const NT = function () {}; return NT; }
+let nextId = 7;
+window.makeNode = async () => {
+  const NT = window.__NT;
+  const node = {
+    id: nextId++, mode: 0, size: [400, 300], properties: {}, graph: {}, inputs: [],
+    widgets: [{ name: 'state_json', value: '{}', type: 'text' }, { name: 'prompt', value: '', type: 'customtext' }],
+    addDOMWidget(name, type, el, opts) { const w = { name, type, element: el, options: opts, value: '' }; this.widgets.push(w); const m = document.createElement('div'); m.style.cssText = 'width:1280px;height:800px;position:relative'; document.getElementById('mount').appendChild(m); m.appendChild(el); return w; },
+    setSize(s) { this.size = s; },
+  };
+  NT.prototype.onNodeCreated.call(node);
+  return node;
+};
+(async () => {
+  const NT = makeNodeType();
+  window.__NT = NT;
+  await window.__ext.beforeRegisterNodeDef(NT, { name: 'TexturePainterAI' }, app);
+  await window.__ext.setup();
+  window.ready = true;
+})();
+</script></body></html>
